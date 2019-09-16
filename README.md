@@ -1,0 +1,2 @@
+# stomar
+ Sql to MapReduce

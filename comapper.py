@@ -17,7 +17,7 @@ DELIMITER = '^' # this is delimiter for Key value pair
 
 # All the Schema of Data files should be declared here in format "TableName" : "ColumnName1  |  ColumnName2  |  ... ColummnNameN"
 Schema = {"users" : " userID  |  age  |  gender  |  occupation  |  zipcode ",
-		  "zipcodes" : " zipcode  |  zipcodetype  |  city  |  state ",
+         "zipcodes" : " zipcode  |  zipcodetype  |  city  |  state ",
           "movies" : " movieID | title | release | unknown | action | adventure | animation | children | comedy | crime | documentary | drama | fantasy | filmnoir | horror | musical | mystery | romance | scifi | thriller | war | western | unknown2 | unknown3 ",
           "rating" : " userID  |  movieID  |  rating  |  timestamp "}
 
@@ -43,36 +43,35 @@ except:
     print("ERROR: Missing Tables or Conditions")
     sys.exit(1)
     
+    
 if where_clause_str != None:
     # where clause is present ! Lets Parse it
 
-    if where_clause_str.find("<>")!=-1:
+    if where_clause_str.find("<>")!=-1:        
         # not equal to operator present
         f = where_clause_str.split("<>")
         f.append(operator.ne)
+        print(f)
+
         
     elif where_clause_str.find("<")!=-1:
         # less than operator
         f = where_clause_str.split("<")
         f.append(operator.lt)
+        print(f)        
+        
     
     elif where_clause_str.find(">")!=-1:
         # more than
         f = where_clause_str.split(">")
         f.append(operator.gt)
+        print(f)        
         
     elif where_clause_str.find("=")!=-1:
         # equal to        
         f = where_clause_str.split("=")
         f.append(operator.eq)
-        
-        
-        
-        
-        
-        
-        
-        
+        print(f)
         
         
         
@@ -137,12 +136,21 @@ for line in sys.stdin:
                     
         else:
             if current_stdin_table == 1:
+                
+                if not f[-1](int(splits[dic_index[f[0]]]),int(f[1])) and where_clause_str != None:
+                    continue
+                    
                 stdout = splits[dic_index[common_column]].strip('"')  #strips " if it exists
                 for column in result_columns:
                     if dic_index[column]!=-1 and column!=common_column:    
                         stdout+=DELIMITER+splits[dic_index[column]].strip('"')
                 print(stdout+DELIMITER+"|1")   # stdout with |1 to identify table - it will help reducer
+            
             elif current_stdin_table == 2:
+                
+                if not f[-1](int(splits[dic_index[f[0]]]),int(f[1])) and where_clause_str != None:
+                    continue
+                    
                 stdout = splits[dic_index[common_column]].strip('"') #strips " if it exists
                 for column in result_columns:
                     if dic_index[column]!=-1 and column!=common_column:    

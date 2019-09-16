@@ -51,27 +51,23 @@ if where_clause_str != None:
         # not equal to operator present
         f = where_clause_str.split("<>")
         f.append(operator.ne)
-        print(f)
 
         
     elif where_clause_str.find("<")!=-1:
         # less than operator
         f = where_clause_str.split("<")
-        f.append(operator.lt)
-        print(f)        
+        f.append(operator.lt)       
         
     
     elif where_clause_str.find(">")!=-1:
         # more than
         f = where_clause_str.split(">")
-        f.append(operator.gt)
-        print(f)        
+        f.append(operator.gt)      
         
     elif where_clause_str.find("=")!=-1:
         # equal to        
         f = where_clause_str.split("=")
         f.append(operator.eq)
-        print(f)
         
         
         

@@ -3,7 +3,7 @@
 Created on Thu Sep 12 17:56:49 2019
 
 @author: Pallav
-@format: python mapper.py -t1 <table1> -t2 <table2>
+@format: python mapper.py -t1 <table1> -t2 <table2> -w "attribute=|<>|<|>value"
 <table1> & <table2> schema should be declared in schema.py 
 """
 
